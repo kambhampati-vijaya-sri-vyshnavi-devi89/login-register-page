@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Blur Transition</title>
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://asset.gecdesigns.com/img/wallpapers/aesthetic-landscape-reflection-background-hd-wallpaper-sr10012410-1706502139247-cover.webp'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Main Content Area */
+        .content {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 40px 50px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(0px); /* Initial state with no blur */
+            transition: backdrop-filter 1.5s ease-out; /* Smooth transition for blur */
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            animation: slideIn 1s ease-out;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInText 1.5s ease-in-out;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #28a745;
+            background-color: #fff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        a:hover {
+            background-color: #28a745;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        a:active {
+            transform: translateY(2px);
+        }
+
+        /* Update Details Link */
+        .update-link {
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* Animation for Heading */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Animation for Paragraph */
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('https://asset.gecdesigns.com/img/wallpapers/aesthetic-landscape-reflection-background-hd-wallpaper-sr10012410-1706502139247-cover.webp'); /* Optional: dark mode wallpaper */
+            }
+
+            .content {
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            a {
+                background-color: #444;
+                color: #fff;
+            }
+
+            a:hover {
+                background-color: #666;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Welcome, {{ user.full_name }}!</h1>
+        <p>Your email: {{ user.email }}</p>
+        <a href="{{ url_for('update') }}" class="update-link">Update Details</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <script>
+        // Adding a class after the page has loaded to trigger the blur effect
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+
+</body>
+</html>
